@@ -1,0 +1,37 @@
+neo4j:
+  name: neo4j-standalone
+  password: processingpipeline
+  
+  # Enable GDS library
+  plugins:
+    - graph-data-science
+
+# Service configuration
+services:
+  neo4j:
+    enabled: true
+    type: ClusterIP
+    ports:
+      http:
+        enabled: true
+        port: 7474
+      bolt:
+        enabled: true
+        port: 7687
+
+# Volume configuration
+volumes:
+  data:
+    mode: defaultStorageClass
+    defaultStorageClass:
+      requests:
+        storage: 2Gi
+
+# Resource limits
+neo4jResources:
+  requests:
+    cpu: "500m"
+    memory: "1Gi"
+  limits:
+    cpu: "1000m"
+    memory: "2Gi"
